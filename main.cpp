@@ -64,6 +64,8 @@ ostream &operator<<(ostream &os, const TimeBomb &b) {
     return os;
 }
 
+
+
 #if TEST_NR > 1
 
 // Fonction d'aide pour afficher une pile et la vider
@@ -81,6 +83,9 @@ void printAndEmptyStack(const string &name, StackList <T> &s) {
 
 int main() {
 
+    StackList<int> a;
+
+    /*
 #if TEST_NR > 0
     {
         cout << "T1 - constructeur par défaut et fonction empty() \n";
@@ -271,6 +276,7 @@ int main() {
     cout << endl;
 
 #endif
+    */
 
 
 }

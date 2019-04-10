@@ -27,6 +27,16 @@ namespace asd1 {
 
     public:
 
+        StackList(){
+            topNode = new Node {nullptr, 0};
+        }
+
+        ~StackList(){
+            delete(topNode);
+        }
+
+    };
+
 // A compléter sans ajouter d'attributs privés et sans utiliser le type T
 // autrement que via les types value_type, reference et const_reference
 //
@@ -38,6 +48,6 @@ namespace asd1 {
 // Cette classe doit offrir garanties faible et forte pour toutes ses
 // fonctionalités
 
-    }
+    };
 
 #endif /* StackList_h */
