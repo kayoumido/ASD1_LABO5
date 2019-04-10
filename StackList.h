@@ -43,17 +43,19 @@ namespace asd1 {
         }
 
         void pop() {
+
+            delete(topNode);
         }
 
         void push(const_reference) {
         }
 
         value_type top() const {
-            return (*topNode).val();
+            return (*topNode).ref()->val();
         }
 
         reference top() {
-            return (*topNode).val();
+            return (*topNode).ref()->val();
         }
 
         reference operator=(const_reference rhs){
