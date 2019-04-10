@@ -31,8 +31,31 @@ namespace asd1 {
             topNode = new Node {nullptr, 0};
         }
 
+        StackList(const StackList& stackList){
+            topNode = stackList.topNode;
+        }
+
         ~StackList(){
             delete(topNode);
+        }
+
+        bool empty() const {
+        }
+
+        void pop() {
+        }
+
+        void push(const_reference) {
+        }
+
+        value_type top() const {
+        }
+
+        reference top() {
+        }
+
+        reference operator=(const_reference rhs){
+
         }
 
     };
