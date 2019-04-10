@@ -49,9 +49,11 @@ namespace asd1 {
         }
 
         value_type top() const {
+            return (*topNode).val();
         }
 
         reference top() {
+            return (*topNode).val();
         }
 
         reference operator=(const_reference rhs){
