@@ -28,33 +28,37 @@ namespace asd1 {
     public:
 
         StackList(){
-            topNode = new Node {nullptr, 0};
+            topNode = nullptr;
         }
 
         StackList(const StackList& stackList){
-            topNode = stackList.topNode;
         }
 
         ~StackList(){
-            delete(topNode);
+            // todo : Delete all Node created
         }
 
         bool empty() const {
+            return topNode == nullptr;
         }
 
         void pop() {
-
+            // todo : throw except if empty
             delete(topNode);
         }
 
-        void push(const_reference) {
+        void push(const_reference value) {
+            Node node = new Node{topNode, value};
+            topNode = &node;
         }
 
         value_type top() const {
+            // todo : throw except if empty
             return (*topNode).ref()->val();
         }
 
         reference top() {
+            // todo : throw exept if empty
             return (*topNode).ref()->val();
         }
 
