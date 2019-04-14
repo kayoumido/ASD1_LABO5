@@ -31,11 +31,35 @@ namespace asd1 {
             topNode = nullptr;
         }
 
+
         StackList(const StackList& stackList){
+            if(stackList.empty()) {
+                topNode = nullptr;
+            }
+            // Otherwise, keep the current stacklist but create entire new nodes emplacement
+            else {
+                // /!\ need to allocate new memory for all our node ! We have pointer, so two pointer must not point on the same memory area
+
+                // Create our new topNode
+                topNode = new Node(*(stackList.topNode));
+                // Stock the currentNodeThis (from this stacklist) and currentNodeForeign (from stacklist in parameter)
+                Node* currentNodeThis = topNode;
+                Node* currentNodeForeign = stackList.topNode;
+                // Stop the loop when this is the last node we need to copy
+                while (currentNodeForeign->nxt != nullptr) {
+                    // Create new node with new memory allocation
+                    currentNodeThis->nxt = new Node(*(currentNodeForeign->nxt));
+                    // Update needed nodes
+                    currentNodeForeign = currentNodeForeign->nxt;
+                    currentNodeThis = currentNodeThis->nxt;
+                }
+            }
         }
 
         ~StackList(){
-            // todo : Delete all Node created
+            while(!empty()){
+                pop();
+            }
         }
 
         bool empty() const {
@@ -43,27 +67,43 @@ namespace asd1 {
         }
 
         void pop() {
-            // todo : throw except if empty
-            delete(topNode);
+            if(empty()){
+                throw StackEmptyException();
+            }
+
+            Node* tmp = topNode;
+            topNode = topNode->nxt;
+
+            delete(tmp);
         }
 
         void push(const_reference value) {
-            Node node = new Node{topNode, value};
-            topNode = &node;
+            Node* newNode = new Node{topNode, value};
+            topNode = newNode;
         }
 
         value_type top() const {
-            // todo : throw except if empty
-            return (*topNode).ref()->val();
+            if(empty()){
+                throw StackEmptyException();
+            }
+
+            return (*topNode).val;
         }
 
         reference top() {
-            // todo : throw exept if empty
-            return (*topNode).ref()->val();
+            if(empty()){
+                throw StackEmptyException();
+            }
+
+            return (*topNode).val;
         }
 
-        reference operator=(const_reference rhs){
-
+        StackList& operator=(const StackList& rhs){
+            // For the = operator, we'll use the copy constructor to allocate all our new nodes etc...
+            // And simply swap our current topNode with the new stack TopNode that will never be use somewhere else
+            StackList<T> newSTack = rhs;
+            std::swap(topNode, newSTack.topNode);
+            return *this;
         }
 
     };

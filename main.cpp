@@ -83,9 +83,6 @@ void printAndEmptyStack(const string &name, StackList <T> &s) {
 
 int main() {
 
-    StackList<int> a;
-
-    /*
 #if TEST_NR > 0
     {
         cout << "T1 - constructeur par défaut et fonction empty() \n";
@@ -93,6 +90,7 @@ int main() {
         cout << "empty() : " << boolalpha << s.empty() << "\n\n";
     }
 #endif
+
 
 #if TEST_NR > 1
     {
@@ -174,7 +172,6 @@ int main() {
     }
 #endif
 
-
 #if TEST_NR > 6
     {
         cout << "T7 - const correctness \n";
@@ -249,7 +246,7 @@ int main() {
     }
     cout << endl << endl;
 #endif
-
+/*
 #if TEST_NR > 9
     {
         cout << "T10 - weak garantee operator= \n";
