@@ -33,28 +33,29 @@ namespace asd1 {
 
 
         StackList(const StackList& stackList){
-            if(stackList.empty()) {
-                topNode = nullptr;
-            }
-            // Otherwise, keep the current stacklist but create entire new nodes emplacement
-            else {
-                // /!\ need to allocate new memory for all our node ! We have pointer, so two pointer must not point on the same memory area
+            // /!\ need to allocate new memory for all our node ! We have pointer, so two pointer must not point on the same memory area
 
-                // Create our new topNode
-                topNode = new Node(*(stackList.topNode));
-                // Stock the currentNodeThis (from this stacklist) and currentNodeForeign (from stacklist in parameter)
-                Node* currentNodeThis = topNode;
-                Node* currentNodeForeign = stackList.topNode;
-                // Stop the loop when this is the last node we need to copy
-                while (currentNodeForeign->nxt != nullptr) {
+            // Create our new topNode (even if the stacklist is empty -> nullptr)
+            topNode = new Node{nullptr, stackList.topNode->val};
+            // Stock the currentNodeThis (from this stacklist) and currentNodeForeign (from stacklist in parameter)
+            Node* currentNodeThis = topNode;
+            Node* currentNodeForeign = stackList.topNode->nxt;
+            // Stop the loop when this is the last node we need to copy
+            while (currentNodeForeign != nullptr) {
+
+                try{
                     // Create new node with new memory allocation
-                    currentNodeThis->nxt = new Node(*(currentNodeForeign->nxt));
-                    // Update needed nodes
-                    currentNodeForeign = currentNodeForeign->nxt;
-                    currentNodeThis = currentNodeThis->nxt;
+                    currentNodeThis->nxt = new Node{nullptr, currentNodeForeign->val};
+                }catch(const std::string& e){
+                    std::cout << "CATCH";
                 }
+
+                // Update needed nodes
+                currentNodeForeign = currentNodeForeign->nxt;
+                currentNodeThis = currentNodeThis->nxt;
             }
         }
+
 
         ~StackList(){
             while(!empty()){
