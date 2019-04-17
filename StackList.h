@@ -27,32 +27,30 @@ namespace asd1 {
 
     public:
 
-        StackList(){
-            topNode = nullptr;
-        }
+        StackList(): topNode(nullptr){}
 
 
-        StackList(const StackList& stackList){
-            // /!\ need to allocate new memory for all our node ! We have pointer, so two pointer must not point on the same memory area
+        StackList(const StackList& stackList) : StackList() {
+            if(stackList.empty()) {
+                topNode = nullptr;
+            }else {
+                // /!\ need to allocate new memory for all our node ! We have pointer, so two pointer must not point on the same memory area
 
-            // Create our new topNode (even if the stacklist is empty -> nullptr)
-            topNode = new Node{nullptr, stackList.topNode->val};
-            // Stock the currentNodeThis (from this stacklist) and currentNodeForeign (from stacklist in parameter)
-            Node* currentNodeThis = topNode;
-            Node* currentNodeForeign = stackList.topNode->nxt;
-            // Stop the loop when this is the last node we need to copy
-            while (currentNodeForeign != nullptr) {
+                // Create our new topNode (even if the stacklist is empty -> nullptr)
+                topNode = new Node{nullptr, stackList.topNode->val};
+                // Stock the currentNodeThis (from this stacklist) and currentNodeForeign (from stacklist in parameter)
+                Node *currentNodeThis = topNode;
+                Node *currentNodeForeign = stackList.topNode->nxt;
+                // Stop the loop when this is the last node we need to copy
 
-                try{
+                while (currentNodeForeign != nullptr) {
                     // Create new node with new memory allocation
                     currentNodeThis->nxt = new Node{nullptr, currentNodeForeign->val};
-                }catch(const std::string& e){
-                    std::cout << "CATCH";
-                }
 
-                // Update needed nodes
-                currentNodeForeign = currentNodeForeign->nxt;
-                currentNodeThis = currentNodeThis->nxt;
+                    // Update needed nodes
+                    currentNodeForeign = currentNodeForeign->nxt;
+                    currentNodeThis = currentNodeThis->nxt;
+                }
             }
         }
 
@@ -100,10 +98,14 @@ namespace asd1 {
         }
 
         StackList& operator=(const StackList& rhs){
-            // For the = operator, we'll use the copy constructor to allocate all our new nodes etc...
-            // And simply swap our current topNode with the new stack TopNode that will never be use somewhere else
-            StackList<T> newSTack = rhs;
-            std::swap(topNode, newSTack.topNode);
+            // Prevent for case a1 = a1 => check memory adresse if same just return the current this object
+            if(&rhs != &(*this)) {
+                // For the = operator, we'll use the copy constructor to allocate all our new nodes etc...
+                // And simply swap our current topNode with the new stack TopNode that will never be use somewhere else
+                StackList<T> newSTack = rhs;
+                std::swap(topNode, newSTack.topNode);
+            }
+
             return *this;
         }
 

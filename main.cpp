@@ -246,7 +246,7 @@ int main() {
     }
     cout << endl << endl;
 #endif
-/*
+
 #if TEST_NR > 9
     {
         cout << "T10 - weak garantee operator= \n";
@@ -254,6 +254,7 @@ int main() {
         StackList <TimeBomb> s1;
         for (int i = 0; i < 5; ++i)
             s1.push(i * i);
+
         cout << endl;
 
         {
@@ -273,7 +274,7 @@ int main() {
     cout << endl;
 
 #endif
-    */
+
 
 
 }
