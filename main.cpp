@@ -1,6 +1,12 @@
 //
 //  main.cpp
 //
+//  Labo 5 - StackList
+//
+//  ASD1 2019
+//
+//  Dessaules Loïc, Kayoumi Doran, Thurnherr Gabrielle
+//
 
 #define TEST_NR 10
 
@@ -148,6 +154,8 @@ int main() {
         for (int i = 0; i < 5; ++i)
             s1.push(i * i);
         StackList<int> s2 = s1;
+        StackList<int> s3;
+        StackList<int> s4 = s3;
         printAndEmptyStack("s1", s1);
         printAndEmptyStack("s2", s2);
         cout << "\n";
